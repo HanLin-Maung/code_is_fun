@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_education/screens/base_screen.dart';
 import 'package:mobile_education/screens/login_screen.dart';
+import 'package:mobile_education/screens/signup_screen.dart';
+import 'package:mobile_education/screens/welcome_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -37,7 +41,16 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const LoginScreen(),
+      home: const WelcomeScreen(),
+      // home: StreamBuilder(
+      //   stream: FirebaseAuth.instance.authStateChanges(),
+      //   builder: (context, snapshot){
+      //     if(snapshot.hasData) {
+      //       return const BaseScreen();
+      //     }
+      //     return const LoginScreen();
+      //   },
+      // ),
     );
   }
 }

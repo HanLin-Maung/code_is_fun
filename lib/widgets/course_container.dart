@@ -28,7 +28,7 @@ class CourseContainer extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.asset(
-                course.thumbnail,
+                course.cover,
                 height: 60,
               ),
             ),
@@ -42,11 +42,11 @@ class CourseContainer extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 const SizedBox(height: 5,),
-                LinearProgressIndicator(
-                  value: course.completedPercentage,
-                  backgroundColor: Colors.black12,
-                  color: kPrimaryColor,
-                )
+                // LinearProgressIndicator(
+                //   // value: course.completedPercentage,
+                //   backgroundColor: Colors.black12,
+                //   color: kPrimaryColor,
+                // )
               ],)
             ),
           ],

@@ -73,20 +73,22 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   @override
   Widget build(BuildContext context) {
     // AspectRatio = responsive layouts across different screen sizes and orientations.
-    return AspectRatio(
-      aspectRatio: _controller.value.aspectRatio,
-      child: Stack(
-        children: [
-          VideoPlayer(
-            _controller,
-          ),
-          Positioned.fill(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [controls ?? Container()],
+    return Container(
+      child: AspectRatio(
+        aspectRatio: _controller.value.aspectRatio,
+        child: Stack(
+          children: [
+            VideoPlayer(
+              _controller,
             ),
-          )
-        ],
+            Positioned.fill(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [controls ?? Container()],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

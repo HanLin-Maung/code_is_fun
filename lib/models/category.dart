@@ -1,34 +1,40 @@
 class Category {
-  String thumbnail;
-  String name;
-  int noOfCourses;
+  String cover;
+  String title;
+  String description;
+  // int noOfCourses;
 
   Category({
-    required this.name,
-    required this.noOfCourses,
-    required this.thumbnail,
+    required this.title,
+    required this.description,
+    required this.cover,
   });
 }
 
-List<Category> categoryList = [
-  Category(
-    name: 'Development',
-    noOfCourses: 55,
-    thumbnail: 'assets/icons/laptop.jpg',
-  ),
-  Category(
-    name: 'Accounting',
-    noOfCourses: 20,
-    thumbnail: 'assets/icons/accounting.jpg',
-  ),
-  Category(
-    name: 'Photography',
-    noOfCourses: 16,
-    thumbnail: 'assets/icons/photography.jpg',
-  ),
-  Category(
-    name: 'Product Design',
-    noOfCourses: 25,
-    thumbnail: 'assets/icons/design.jpg',
-  ),
-];
+
+// void _category() async{
+  
+// }
+
+// List<Category> categoryList = [
+//   Category(
+//     name: 'Mobile Development',
+//     noOfCourses: 55,
+//     cover: 'assets/icons/laptop.jpg',
+//   ),
+//   Category(
+//     name: 'Web Development',
+//     noOfCourses: 20,
+//     cover: 'assets/icons/accounting.jpg',
+//   ),
+//   Category(
+//     name: 'Photography',
+//     noOfCourses: 16,
+//     cover: 'assets/icons/photography.jpg',
+//   ),
+//   Category(
+//     name: 'Product Design',
+//     noOfCourses: 25,
+//     cover: 'assets/icons/design.jpg',
+//   ),
+// ];

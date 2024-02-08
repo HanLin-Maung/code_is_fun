@@ -65,7 +65,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   height: 15,
                 ),
                 const Text(
-                  "Futter Novice to Ninja",
+                  "Flutter",
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 18,
@@ -75,7 +75,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   height: 3,
                 ),
                 const Text(
-                  "Created by DevWheels",
+                  "CodingIs Fun",
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
@@ -155,7 +155,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
 }
 
 class Description extends StatelessWidget {
-  const Description({Key? key}) : super(key: key);
+  const Description({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -297,3 +297,4 @@ class PlayList extends StatelessWidget {
     );
   }
 }
+

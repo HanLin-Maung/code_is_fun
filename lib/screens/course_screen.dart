@@ -7,13 +7,13 @@ import 'package:mobile_education/widgets/custom_icon_button.dart';
 class CourseScreen extends StatefulWidget {
   const CourseScreen({super.key});
 
-  // final String title;
-
   @override
   State<CourseScreen> createState() => _CourseScreenState();
 }
 
 class _CourseScreenState extends State<CourseScreen> {
+  
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(

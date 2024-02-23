@@ -20,7 +20,6 @@ class API {
     } catch (err) {
       // print(err.toString());
       throw Exception('Failed to connect to the server: $err');
-
     }
   }
 
@@ -41,4 +40,3 @@ class API {
     }
   }
 }
-

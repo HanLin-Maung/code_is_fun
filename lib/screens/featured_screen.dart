@@ -6,12 +6,12 @@ import 'package:http/http.dart';
 import 'package:mobile_education/api.dart';
 import 'package:mobile_education/constants/color.dart';
 import 'package:mobile_education/constants/size.dart';
-import 'package:mobile_education/models/category.dart';
 import 'package:mobile_education/screens/course_screen.dart';
-import 'package:mobile_education/widgets/category_card.dart';
+import 'package:mobile_education/screens/imgae_upload.dart';
 import 'package:mobile_education/widgets/circle_button.dart';
 import 'package:mobile_education/widgets/search_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 List categoryList = [];
 
@@ -212,15 +212,17 @@ class _BodyState extends State<Body> {
           ),
           GridView.builder(
             shrinkWrap: true,
+            primary: false,
             padding: const EdgeInsets.symmetric(
               horizontal: 20,
-              vertical: 10,
+
+              vertical: 20,
             ),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: isWideScreen ? 4 : 2,
-              childAspectRatio: 0.8,
+              childAspectRatio: 0.75,
               crossAxisSpacing: 20,
-              mainAxisSpacing: 24,
+              mainAxisSpacing: 20,
             ),
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
@@ -265,6 +267,39 @@ class _BodyState extends State<Body> {
             },
             itemCount: widget.categories.length,
           ),
+        GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>const ImageUpload()));
+                // Handle tap event for the new category card
+              },
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(.1),
+                      blurRadius: 4.0,
+                      spreadRadius: .05,
+                    )
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Add your category card content here
+                    Text("New Category"),
+                    // Add more widgets as needed
+                  ],
+                ),
+              ),
+            ),
+        ],
+      ),
+    ),);
+  }
+}
 
 //           GridView.builder(
 //   shrinkWrap: true,
@@ -323,11 +358,6 @@ class _BodyState extends State<Body> {
 //   itemCount: widget.categories.length,
 // ),
 
-        ],
-      ),
-    ),);
-  }
-}
 
 class AppBar extends StatelessWidget {
   const AppBar({super.key});

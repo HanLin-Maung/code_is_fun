@@ -231,11 +231,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 20,
                       ),
                       FadeInUp(
-                        duration: Duration(milliseconds: 1700),
+                        duration: const Duration(milliseconds: 1700),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Don't have an account? "),
+                            const Text("Don't have an account? "),
                             TextButton(
                                 onPressed: () {
                                   Navigator.push(

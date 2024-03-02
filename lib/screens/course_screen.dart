@@ -12,7 +12,6 @@ class CourseScreen extends StatefulWidget {
 }
 
 class _CourseScreenState extends State<CourseScreen> {
-  
 
   @override
   Widget build(BuildContext context) {
@@ -25,55 +24,56 @@ class _CourseScreenState extends State<CourseScreen> {
               horizontal: 20, 
               vertical: 10
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                IntrinsicHeight(
-                  child: Stack(
-                    children: [
-                      Align(child: Text(
-                        'Development', 
-                        style: Theme.of(context).textTheme.displayMedium,
+            
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  IntrinsicHeight(
+                    child: Stack(
+                      children: [
+                        Align(child: Text(
+                          'Chapters', 
+                          style: Theme.of(context).textTheme.displayMedium,
+                          ),
                         ),
-                      ),
-                      Positioned(
-                        left: 0,
-                        child: CustomIconButton(
-                          child: const Icon(Icons.arrow_back),
-                          height: 35,
-                          width: 35,
-                          onTap: () {
-                            Navigator.pop(context);
-                          }
+                        Positioned(
+                          left: 0,
+                          child: CustomIconButton(
+                            height: 35,
+                            width: 35,
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Icon(Icons.arrow_back)
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Expanded(
-                  child: ListView.separated(
-                    shrinkWrap: true, // ListView widget controls whether the ListView should adjust its size based on the size of its contents.
-                    itemBuilder: (_, index){
-                      return CourseContainer(
-                        course: courses[index],
-                      );
-                    }, 
-                    separatorBuilder: (context, _) {
-                      return const SizedBox(
-                        height: 10,
-                      );
-                    }, 
-                    itemCount: courses.length
+                  const SizedBox(
+                    height: 15,
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: ListView.separated(
+                      shrinkWrap: true, // ListView widget controls whether the ListView should adjust its size based on the size of its contents.
+                      itemBuilder: (_, index){
+                        return CourseContainer(
+                          course: courses[index],
+                        );
+                      }, 
+                      separatorBuilder: (context, _) {
+                        return const SizedBox(
+                          height: 10,
+                        );
+                      }, 
+                      itemCount: courses.length
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

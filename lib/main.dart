@@ -1,8 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_education/screens/base_screen.dart';
-import 'package:mobile_education/screens/login_screen.dart';
-import 'package:mobile_education/screens/signup_screen.dart';
 import 'package:mobile_education/screens/welcome_screen.dart';
 
 void main() {

@@ -23,7 +23,24 @@ class API {
     }
   }
 
-  categoryList() async {
+  signup(String name, String email, String password) async {
+    try {
+      var response = await http.post(
+        Uri.parse('$domain/register'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(
+          {'name': name, 'email': email, 'password': password},
+        ),
+      );
+      return response;
+    } catch (err) {
+      throw Exception('Failed to connect to the server: $err');
+    }
+  }
+
+  getCategoryList() async {
     final prefs = await SharedPreferences.getInstance();
     var token = prefs.getString("token");
     try {

@@ -1,14 +1,15 @@
 import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mobile_education/api.dart';
+import 'package:mobile_education/Api/api.dart';
 import 'package:mobile_education/constants/color.dart';
 import 'package:mobile_education/constants/size.dart';
 import 'package:mobile_education/screens/course_screen.dart';
+import 'package:mobile_education/widgets/add_category.dart';
 import 'package:mobile_education/widgets/circle_button.dart';
 import 'package:mobile_education/widgets/main_drawer.dart';
-
 
 List categoryList = [];
 
@@ -28,7 +29,7 @@ class _FeaturedScreenState extends State<FeaturedScreen> {
 
   Future<void> fetchCategories() async {
     try {
-      var response = await API().categoryList();
+      var response = await API().getCategoryList();
 
       if (response.statusCode == 201) {
         var res = json.decode(response.body);
@@ -57,12 +58,27 @@ class _FeaturedScreenState extends State<FeaturedScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              AppBar(),
+              const AppBar(),
               Body(categories: categoryList),
             ],
           ),
         ),
-        drawer: MainDrawer(),
+        drawer: const MainDrawer(),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (_)=>const AddCategory()));
+          }, 
+          icon: const Icon(Icons.add),
+          label:const Text('Add Category'),
+          backgroundColor: Color.fromARGB(255, 27, 34, 75),
+          foregroundColor:  Colors.white,
+        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: (){},  
+        //   child: Icon(Icons.add),
+        //   backgroundColor: Colors.grey,
+        // ),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),
     ),
     );
@@ -91,7 +107,7 @@ class _BodyState extends State<Body> {
 
   // Truncate the description if it exceeds the maximum number of words
   String _truncateDescription(String description) {
-    final int maxWords = 6;
+    final int maxWords = 5;
     final words = description.split(' ');
     if (words.length <= maxWords) {
       return description;
@@ -149,14 +165,16 @@ class _BodyState extends State<Body> {
               ),
               crossAxisCount: isWideScreen ? 4 : 2,
               childAspectRatio: 0.75,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
               children: categoryItems,
             ),
           ],
         ),
       ),
+      
     );
+    
   }
 
   // Build category item widget
@@ -186,8 +204,8 @@ class _BodyState extends State<Body> {
           children: [
             Align(
               alignment: Alignment.topRight,
-              child: Image.network(
-                category["cover"],
+              child: CachedNetworkImage(
+                imageUrl: category["cover"],
                 height: kCategoryCardImageSize,
               ),
             ),
@@ -282,7 +300,6 @@ class _AppBarState extends State<AppBar> {
 //   Widget build(BuildContext context) {
 //     final screenWidth = MediaQuery.of(context).size.width;
 //     final isWideScreen = screenWidth > 600;
-
 
 
 //     return Container(
@@ -735,3 +752,13 @@ class _AppBarState extends State<AppBar> {
 //   },
 //   itemCount: widget.categories.length,
 // ),
+
+// FloatingActionButton.extended(
+//   backgroundColor: const Color(0xff03dac6),
+//   foregroundColor: Colors.black,
+//   onPressed: () {
+//     // Respond to button press
+//   },
+//   icon: Icon(Icons.add),
+//   label: Text('EXTENDED'),
+// )

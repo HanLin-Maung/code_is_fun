@@ -1,5 +1,5 @@
 class Category {
-  String cover;
+  String? cover;
   String title;
   String description;
   // int noOfCourses;

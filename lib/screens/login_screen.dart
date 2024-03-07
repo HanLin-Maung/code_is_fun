@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:mobile_education/api.dart';
+import 'package:mobile_education/Api/api.dart';
 import 'package:mobile_education/screens/featured_screen.dart';
 import 'package:mobile_education/screens/signup_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -196,10 +196,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 40,
+                        height: 40, 
                       ),
                       FadeInUp(
-                          duration: Duration(milliseconds: 1600),
+                          duration: const Duration(milliseconds: 1600),
                           child: MaterialButton(
                             onPressed: () {
                               _login();

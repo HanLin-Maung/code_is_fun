@@ -46,41 +46,39 @@ class _FeaturedScreenState extends State<FeaturedScreen> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Builder(
-        builder: (context) => 
-      Scaffold(
-        
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const AppBar(),
-              Body(categories: categoryList),
-            ],
+        builder: (context) => Scaffold(
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                const AppBar(),
+                Body(categories: categoryList),
+              ],
+            ),
           ),
+          drawer: const MainDrawer(),
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const AddCategory()));
+            },
+            icon: const Icon(Icons.add),
+            label: const Text('Add Category'),
+            backgroundColor: const Color.fromARGB(255, 27, 34, 75),
+            foregroundColor: Colors.white,
+          ),
+          // floatingActionButton: FloatingActionButton(
+          //   onPressed: (){},
+          //   child: Icon(Icons.add),
+          //   backgroundColor: Colors.grey,
+          // ),
+          // floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         ),
-        drawer: const MainDrawer(),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (_)=>const AddCategory()));
-          }, 
-          icon: const Icon(Icons.add),
-          label:const Text('Add Category'),
-          backgroundColor: Color.fromARGB(255, 27, 34, 75),
-          foregroundColor:  Colors.white,
-        ),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: (){},  
-        //   child: Icon(Icons.add),
-        //   backgroundColor: Colors.grey,
-        // ),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),
-    ),
     );
   }
 }
@@ -93,7 +91,6 @@ class Body extends StatefulWidget {
   @override
   State<Body> createState() => _BodyState();
 }
-
 
 class _BodyState extends State<Body> {
   bool showAllCategories = false;
@@ -172,9 +169,7 @@ class _BodyState extends State<Body> {
           ],
         ),
       ),
-      
     );
-    
   }
 
   // Build category item widget
@@ -202,13 +197,13 @@ class _BodyState extends State<Body> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: CachedNetworkImage(
-                imageUrl: category["cover"],
-                height: kCategoryCardImageSize,
-              ),
-            ),
+            // Align(
+            //   alignment: Alignment.topRight,
+            //   child: CachedNetworkImage(
+            //     imageUrl: category["cover"],
+            //     height: kCategoryCardImageSize,
+            //   ),
+            // ),
             const SizedBox(height: 10),
             Text(category["title"]),
             Text(
@@ -236,29 +231,26 @@ class _AppBarState extends State<AppBar> {
       padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
       height: 130,
       width: double.infinity,
-      
       decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(25),
-          bottomRight: Radius.circular(25),
-        ),
-        gradient: RadialGradient(
-          colors: [
-            Color.fromARGB(255, 52, 71, 81),
-            Color.fromARGB(255, 30, 39, 44),
-          ],
-          radius: 0.9,
-        ),
-        boxShadow: [
-          BoxShadow(
-
-            color: Colors.grey,
-            spreadRadius: 4,
-            blurRadius: 5,
-            offset: Offset(0, 3), // changes position of shadow
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
           ),
-        ]
-      ),
+          gradient: RadialGradient(
+            colors: [
+              Color.fromARGB(255, 52, 71, 81),
+              Color.fromARGB(255, 30, 39, 44),
+            ],
+            radius: 0.9,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              spreadRadius: 4,
+              blurRadius: 5,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ]),
       child: Column(
         children: [
           Row(
@@ -266,7 +258,9 @@ class _AppBarState extends State<AppBar> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               IconButton(
-                onPressed: (){Scaffold.of(context).openDrawer();}, 
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
                 icon: const Icon(Icons.menu),
                 color: Colors.white,
               ),
@@ -284,7 +278,7 @@ class _AppBarState extends State<AppBar> {
 }
 
 //import 'package:mobile_education/screens/imgae_upload.dart';
-//         // Navigator.push(context, MaterialPageRoute(builder: (context) => const MainDrawer()))  
+//         // Navigator.push(context, MaterialPageRoute(builder: (context) => const MainDrawer()))
 //   Scaffold.of(context).openDrawer();
 
 // class _BodyState extends State<Body> {
@@ -300,7 +294,6 @@ class _AppBarState extends State<AppBar> {
 //   Widget build(BuildContext context) {
 //     final screenWidth = MediaQuery.of(context).size.width;
 //     final isWideScreen = screenWidth > 600;
-
 
 //     return Container(
 //       child: Column(
@@ -405,12 +398,12 @@ class _AppBarState extends State<AppBar> {
 //                   foregroundColor: Colors.cyanAccent,
 //                   backgroundColor: Colors.grey,
 //                   elevation: 10.0,
-//                   onPressed:(){ 
-//                     Navigator.push(context, 
+//                   onPressed:(){
+//                     Navigator.push(context,
 //                     MaterialPageRoute(builder: (context) => const ImageUpload()));
-//                   }, 
+//                   },
 //                   label: const Text("New Category"),
-//                   icon: const Icon(Icons.add), 
+//                   icon: const Icon(Icons.add),
 //                 ),
 //               ),
 //             ),
@@ -419,7 +412,6 @@ class _AppBarState extends State<AppBar> {
 //     );
 //   }
 // }
-
 
 // class _BodyState extends State<Body> {
 //   bool showAllCategories = false;
@@ -581,29 +573,24 @@ class _AppBarState extends State<AppBar> {
 //   }
 // }
 
+// const SizedBox(
+//   height: 20,
+// ),
+// const SearchTextField()
 
+// Future<void> fetchCategories() async{
+//     var response = await API().categoryList();
 
+//     if(response.statusCode == 200) {
+//       var jsonResponse = json.decode(response.body);
 
-
-          // const SizedBox(
-          //   height: 20,
-          // ),
-          // const SearchTextField()
-
-
- // Future<void> fetchCategories() async{
-  //     var response = await API().categoryList();
-
-  //     if(response.statusCode == 200) {
-  //       var jsonResponse = json.decode(response.body);
-
-  //       setState(() {
-  //         categoryList = jsonResponse['categories'];
-  //       });
-  //     } else {
-  //       throw Exception('Failed to load categories');
-  //     }
-  // }
+//       setState(() {
+//         categoryList = jsonResponse['categories'];
+//       });
+//     } else {
+//       throw Exception('Failed to load categories');
+//     }
+// }
 
 // class _BodyState extends State<Body> {
 
@@ -694,7 +681,6 @@ class _AppBarState extends State<AppBar> {
 //     );
 //   }
 // }
-
 
 //           GridView.builder(
 //   shrinkWrap: true,

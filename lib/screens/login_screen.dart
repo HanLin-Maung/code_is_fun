@@ -16,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _form = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -139,58 +140,73 @@ class _LoginScreenState extends State<LoginScreen> {
                                     offset: Offset(0, 10))
                               ]),
                           child: SingleChildScrollView(
-                            child: Column(
-                              children: <Widget>[
-                                Container(
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(
-                                          color: Colors.grey.shade200),
+                            child: Form(
+                              key: _form,
+                              child: Column(
+                                children: <Widget>[
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                            color: Colors.grey.shade200),
+                                      ),
                                     ),
-                                  ),
-                                  child: TextField(
-                                    controller: _emailController,
-                                    obscureText: false,
-                                    decoration: const InputDecoration(
-                                      hintText: 'Email',
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                      border: InputBorder.none,
-                                      prefixIcon: Icon(Icons.email),
-                                    ),
-                                    keyboardType: TextInputType.emailAddress,
-                                  ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(
-                                          color: Colors.grey.shade200),
-                                    ),
-                                  ),
-                                  child: TextField(
-                                    controller: _passwordController,
-                                    obscureText: _isHidden,
-                                    decoration: InputDecoration(
-                                        hintText: 'Password',
-                                        hintStyle:
-                                            TextStyle(color: Colors.grey),
+                                    child: TextField(
+                                      controller: _emailController,
+                                      obscureText: false,
+                                      decoration: const InputDecoration(
+                                        hintText: 'Email',
+                                        hintStyle: TextStyle(color: Colors.grey),
                                         border: InputBorder.none,
-                                        prefixIcon: Icon(Icons.password),
-                                        suffixIcon: IconButton(
-                                          icon: Icon(_isHidden
-                                              ? Icons.visibility_off
-                                              : Icons.visibility),
-                                          onPressed: () {
-                                            setState(() {
-                                              _isHidden = !_isHidden;
-                                            });
-                                          },
-                                        )),
+                                        prefixIcon: Icon(Icons.email),
+                                        
+                                      ),
+                                      keyboardType: TextInputType.emailAddress,
+                                      autocorrect: false,
+                                      textCapitalization: TextCapitalization.none,
+                                      // validator: (value) {
+                                      //   if (value == null || value.isEmpty) {
+                                      //     return "Please enter your email address.";
+                                      //   }
+                                      //   return null;
+                                      // },
+                                      // onSaved: () {
+                                        
+                                      // }
+                                    ),
                                   ),
-                                )
-                              ],
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                            color: Colors.grey.shade200),
+                                      ),
+                                    ),
+                                    child: TextField(
+                                      controller: _passwordController,
+                                      obscureText: _isHidden,
+                                      decoration: InputDecoration(
+                                          hintText: 'Password',
+                                          hintStyle:
+                                              TextStyle(color: Colors.grey),
+                                          border: InputBorder.none,
+                                          prefixIcon: Icon(Icons.password),
+                                          suffixIcon: IconButton(
+                                            icon: Icon(_isHidden
+                                                ? Icons.visibility_off
+                                                : Icons.visibility),
+                                            onPressed: () {
+                                              setState(() {
+                                                _isHidden = !_isHidden;
+                                              });
+                                            },
+                                          )),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -228,7 +244,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           )),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       FadeInUp(
                         duration: const Duration(milliseconds: 1700),
@@ -245,7 +261,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                               const SignUpScreen()));
                                 },
                                 child: const Text("Sign Up",
-                                    style: TextStyle(color: Colors.blue)))
+                                    style: TextStyle(color: Colors.blue, fontSize: 17),
+                                    
+                                  ))
                           ],
                         ),
                       )

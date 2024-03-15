@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mobile_education/Api/api.dart';
 import 'package:mobile_education/screens/featured_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,26 +9,8 @@ import 'login_screen.dart';
 
 const domain = "https://coding-is-fun.onrender.com/api/v1";
 
-//  class API {
-//   login(String email, password) async {
-//     try {
-//       var response = await http.post(
-//         Uri.parse('$domain/login'),
-//         headers: <String, String>{
-//           'Content-Type': 'application/json; charset=UTF-8',
-//         },
-//         body: jsonEncode(
-//           {'email': email, 'password': password},
-//         ),
-//       );
-//       return response;
-//     } catch (err) {
-//       throw Exception('Failed to connect to the server: $err');
-//     }
-//   }
 
-  
-//}
+
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -44,47 +27,96 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool isLoading = false;
   // bool _isHide = true;
 
-  @override
+@override
+  // void dispose() {
+  //   _nameController.dispose();
+  //   _emailController.dispose();
+  //   _passwordController.dispose();
+  //   super.dispose();
+  // }
+
+  // _signup() async {
+  //   setState(() {
+  //     isLoading = true;
+  //   });
+  //   final prefs = await SharedPreferences.getInstance();
+  //   var response = await API().signup(
+  //     _nameController.text,
+  //     _emailController.text,
+  //     _passwordController.text,
+  //   );
+  //   var res = jsonDecode(response.body);
+  //   if (response.statusCode == 200) {
+  //     if (res["success"] == true) {
+  //       isLoading = false;
+  //       await prefs.setString("token", res["accessToken"].toString());
+  //       Navigator.push(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: (context) => FeaturedScreen(),
+  //         ),
+  //       );
+  //     }
+  //   } else if (response.statusCode == 400) {
+  //     if (res["success"] == false) {
+  //       var snackBar = SnackBar(content: Text('${res["message"]}'));
+  //       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  //     }
+  //   } else {
+  //     print('Failed to signup. Status code: ${response.statusCode}');
+  //     print('Response body: ${response.body}');
+  //   }
+  //   setState(() {});
+  // }
+
   void dispose() {
     _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
+Future<void> _signup() async {
+  setState(() {
+    isLoading = true;
+  });
 
-  _signup() async {
-    setState(() {
-      isLoading = true;
-    });
+  try {
     final prefs = await SharedPreferences.getInstance();
-    var response = await API().signup(
+    var response = await API().register(
       _nameController.text,
       _emailController.text,
       _passwordController.text,
     );
-    var res = jsonDecode(response.body);
-    if (response.statusCode == 200) {
+
+    if (response.statusCode == 201) {
+      var res = jsonDecode(response.body);
       if (res["success"] == true) {
-        isLoading = false;
         await prefs.setString("token", res["accessToken"].toString());
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
-          MaterialPageRoute(
-            builder: (context) => FeaturedScreen(),
-          ),
+          MaterialPageRoute(builder: (context) => LoginScreen()),
         );
-      }
-    } else if (response.statusCode == 400) {
-      if (res["success"] == false) {
+      } else {
         var snackBar = SnackBar(content: Text('${res["message"]}'));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
+    } else if (response.statusCode == 429) {
+      var snackBar = SnackBar(content: Text('Too many requests. Please try again later.'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else {
       print('Failed to signup. Status code: ${response.statusCode}');
       print('Response body: ${response.body}');
     }
-    setState(() {});
+  } catch (e) {
+    print('Error occurred during signup: $e');
   }
+
+  setState(() {
+    isLoading = false;
+  });
+}
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -98,9 +130,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               colors: [
-                // Color.fromARGB(255, 43, 42, 48),
-                // Color.fromARGB(255, 85, 4, 206),
-                // Color.fromARGB(255, 142, 138, 149)
                 Colors.blueGrey.shade900,
                 Colors.blueGrey.shade700,
                 Colors.blueGrey.shade400
@@ -233,26 +262,40 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         const SizedBox(height: 40,),
                         FadeInUp(
                           duration: const Duration(milliseconds: 1500),
-                          child: Container(
-                            height: 50,width: 300,
-                            decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            gradient: const RadialGradient(
-                              colors: [
-                              Color.fromARGB(255, 52, 71, 81),
-                              Color.fromARGB(255, 30, 39, 44),
-                              ],
-                              radius: 0.9,
+                          child: MaterialButton(
+                            onPressed: () { 
+                              _signup();
+                              setState(() {
+                                
+                              });
+                            },
+                            child: Container(
+                              height: 50,width: 300,
+                              decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              gradient: const RadialGradient(
+                                colors: [
+                                Color.fromARGB(255, 52, 71, 81),
+                                Color.fromARGB(255, 30, 39, 44),
+                                ],
+                                radius: 0.9,
+                              ),
                             ),
-                          ),
-                          child: const Center(
-                            child: Text('SIGN IN',style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.white
-                          ),
-                          ),
-                          ),
+                            child: Center(
+                              child:isLoading
+                                  ? const SpinKitRing(
+                                      color: Colors.white,
+                                      size: 30,
+                                      lineWidth: 2,
+                                    )
+                              :const Text('SIGN IN',style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white
+                            ),
+                            ),
+                            ),
+                            ),
                           ),
                         ),
                         const SizedBox(height: 10,),

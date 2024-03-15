@@ -29,6 +29,7 @@ class _MainDrawerState extends State<MainDrawer> {
       child: Column(
         children: [
           const DrawerHeader(
+            
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -60,8 +61,8 @@ class _MainDrawerState extends State<MainDrawer> {
                 ),
                 SizedBox(width: 10),
                 Text(
-                  'CodingIs Fun!',
-                  style: TextStyle(fontSize: 30, color: Colors.white),
+                  'MSI App',
+                  style: TextStyle(fontSize: 23, color: Colors.white,fontWeight: FontWeight.bold),
                 ),
               ],
             ),

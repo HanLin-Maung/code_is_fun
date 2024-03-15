@@ -55,17 +55,17 @@
 //             ),
 //             label: "My Learning",
 //           ),
-//           // BottomNavigationBarItem(
-//           //   activeIcon: Image.asset(
-//           //     icWishlist,
-//           //     height: kBottomNavigationBarItemSize,
-//           //   ),
-//           //   icon: Image.asset(
-//           //     icWishlistOutlined,
-//           //     height: kBottomNavigationBarItemSize,
-//           //   ),
-//           //   label: "Wishlist",
-//           // ),
+//           BottomNavigationBarItem(
+//             activeIcon: Image.asset(
+//               icWishlist,
+//               height: kBottomNavigationBarItemSize,
+//             ),
+//             icon: Image.asset( 
+//               icWishlistOutlined,
+//               height: kBottomNavigationBarItemSize,
+//             ),
+//             label: "Wishlist",
+//           ),
 //           BottomNavigationBarItem(
 //             activeIcon: Image.asset(
 //               icSetting,

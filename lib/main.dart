@@ -38,7 +38,11 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const WelcomeScreen(),
-      // home: StreamBuilder(
+    );
+  }
+}
+
+//home: StreamBuilder(
       //   stream: FirebaseAuth.instance.authStateChanges(),
       //   builder: (context, snapshot){
       //     if(snapshot.hasData) {
@@ -47,6 +51,3 @@ class MyApp extends StatelessWidget {
       //     return const LoginScreen();
       //   },
       // ),
-    );
-  }
-}
